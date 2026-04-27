@@ -1,4 +1,8 @@
-const API_BASE = '/api';
+// Use the computer's local IP for the backend when running on Android
+// If developing locally on PC, '/api' is fine because of Vite proxy, but APK needs the full URL
+const API_BASE = window.location.protocol === 'http:' && window.location.hostname !== 'localhost' 
+  ? '/api' 
+  : 'http://10.18.60.86:3000/api';
 
 async function request(endpoint: string, options: RequestInit = {}) {
   const token = localStorage.getItem('token');
